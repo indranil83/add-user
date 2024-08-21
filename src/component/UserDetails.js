@@ -1,22 +1,24 @@
 import React from "react";
-import { DeleteAllUser } from "./DeleteAllUser";
+import  DeleteAllUser  from "./DeleteAllUser";
 import styled from "styled-components";
 import { fakeUserData } from "../api";
-import { useDispatch} from "react-redux"
+import { useDispatch} from "react-redux";
 import { addUser } from "../store/slices/UserSlice";
 import DisplayUsers from "./DisplayUsers"
+import { v4 as uuidv4 } from 'uuid';
 
 const UserDetails = () => {
 const dispatch = useDispatch()
- const addNewUser=(name)=>{
-dispatch( addUser(name))
+ const addNewUser=()=>{
+  const newUser = { id: uuidv4(), name: fakeUserData() };
+dispatch( addUser(newUser))
  }
   return (
     <Wrapper>
       <div className="content">
         <div className="admin-table">
           <div className="admin-subtitle">List of User Details</div>
-          <button className="btn add-btn" onClick={()=>addNewUser( fakeUserData())}>Add New Users</button>
+          <button className="btn add-btn" onClick={addNewUser}>Add New Users</button>
         </div>
         <ul>
           <DisplayUsers/>
